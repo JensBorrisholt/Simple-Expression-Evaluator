@@ -1,0 +1,48 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+    <PropertyGroup>
+        <ProjectGuid>{5A9EF6D4-290B-45A6-903F-C55224DFE17B}</ProjectGuid>
+    </PropertyGroup>
+    <ItemGroup>
+        <Projects Include="Demo\Demo.dproj">
+            <Dependencies/>
+        </Projects>
+        <Projects Include="Test\SimpleExpressionEvaluatorTest.dproj">
+            <Dependencies/>
+        </Projects>
+    </ItemGroup>
+    <ProjectExtensions>
+        <Borland.Personality>Default.Personality.12</Borland.Personality>
+        <Borland.ProjectType/>
+        <BorlandProject>
+            <Default.Personality/>
+        </BorlandProject>
+    </ProjectExtensions>
+    <Target Name="Demo">
+        <MSBuild Projects="Demo\Demo.dproj"/>
+    </Target>
+    <Target Name="Demo:Clean">
+        <MSBuild Projects="Demo\Demo.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="Demo:Make">
+        <MSBuild Projects="Demo\Demo.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="SimpleExpressionEvaluatorTest">
+        <MSBuild Projects="Test\SimpleExpressionEvaluatorTest.dproj"/>
+    </Target>
+    <Target Name="SimpleExpressionEvaluatorTest:Clean">
+        <MSBuild Projects="Test\SimpleExpressionEvaluatorTest.dproj" Targets="Clean"/>
+    </Target>
+    <Target Name="SimpleExpressionEvaluatorTest:Make">
+        <MSBuild Projects="Test\SimpleExpressionEvaluatorTest.dproj" Targets="Make"/>
+    </Target>
+    <Target Name="Build">
+        <CallTarget Targets="Demo;SimpleExpressionEvaluatorTest"/>
+    </Target>
+    <Target Name="Clean">
+        <CallTarget Targets="Demo:Clean;SimpleExpressionEvaluatorTest:Clean"/>
+    </Target>
+    <Target Name="Make">
+        <CallTarget Targets="Demo:Make;SimpleExpressionEvaluatorTest:Make"/>
+    </Target>
+    <Import Project="$(BDS)\Bin\CodeGear.Group.Targets" Condition="Exists('$(BDS)\Bin\CodeGear.Group.Targets')"/>
+</Project>
